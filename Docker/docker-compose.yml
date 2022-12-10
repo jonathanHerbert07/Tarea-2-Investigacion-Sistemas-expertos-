@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  auto-sim-build:
+    build: .
+    image: ${DOCKER_IMAGE_NAME}
+    container_name: auto-sim-build
+    user: ${UID}
+    environment:
+      - BUILD_NUMBER
+      - GIT_COMMIT
+      - UNITY_USERNAME
+      - UNITY_PASSWORD
+      - UNITY_SERIAL
+      - NAME
+    volumes:
+      - ..:/mnt
+    network_mode: "host"
+    command: "/mnt/Docker/unity_build.sh"
